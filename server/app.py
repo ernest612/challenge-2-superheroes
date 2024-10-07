@@ -66,7 +66,7 @@ def patch_power_by_id(id):
     description = data.get("description", "")
 
     if len(description) < 20:
-        return jsonify({"errors": ["description must be less than 20 characters"]}), 400
+        return jsonify({"errors": ["validation errors"]}), 400
 
     power.description = description
     db.session.commit()
@@ -81,10 +81,7 @@ def create_hero_power():
     power_id = data.get("power_id")
 
     if strength not in ["Strong", "Weak", "Average"]:
-        return (
-            jsonify({"errors": ["Strength must be either Strong, Weak or Average"]}),
-            400,
-        )
+        return jsonify({"errors": ["validation errors"]}), 400
 
     hero = Hero.query.get(hero_id)
     power = Power.query.get(power_id)
